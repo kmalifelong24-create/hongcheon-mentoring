@@ -43,7 +43,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(45,176,75,0.12);
       padding: 0 64px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-start; position: relative;
       height: 72px;
     }
     .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -59,7 +59,7 @@
     .logo-text .main { font-size: 15px; font-weight: 800; color: var(--txt-dark); }
     .logo-text .main span { color: var(--green); }
 
-    nav { display: flex; align-items: center; gap: 4px; }
+    nav { display: flex; align-items: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); }
     nav a {
       text-decoration: none; color: var(--txt-mid);
       font-size: 15px; font-weight: 500;
@@ -389,7 +389,7 @@
       box-shadow: 0 2px 16px rgba(0,0,0,0.07); border-top: 3px solid var(--green-dark);
     }
     .n-row {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-start; position: relative;
       padding: 20px 28px; border-bottom: 1px solid #F0F0F0;
       text-decoration: none; color: var(--txt-dark);
       transition: background .15s;
@@ -835,7 +835,6 @@
     <a href="#about" class="active">사업소개</a>
     <a href="#notice">공지사항</a>
   </nav>
-  <a class="btn-login" href="#login">로그인</a>
 </header>
 
 <!-- ══ HERO ══ -->
