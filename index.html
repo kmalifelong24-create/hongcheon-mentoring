@@ -1205,9 +1205,96 @@
     .n-row:hover .n-badge { filter: brightness(1.2); }
     .n-row:active { background: #0b4a1e; }
 
+
+    /* ══════════════ 홈페이지 입장 팝업 ══════════════ */
+    #site-popup-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.55);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+    #site-popup-overlay.hidden { opacity: 0; pointer-events: none; }
+    #site-popup {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 480px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: popupIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popupIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    #site-popup img.popup-poster {
+      width: 100%; display: block;
+      border-radius: 16px 16px 0 0;
+    }
+    .popup-body {
+      padding: 20px 24px 8px;
+    }
+    .popup-body h3 {
+      font-size: 17px; font-weight: 700;
+      color: #1a6b30; margin: 0 0 12px;
+    }
+    .popup-body p {
+      font-size: 13.5px; color: #333; line-height: 1.7;
+      margin: 0 0 6px;
+    }
+    .popup-body p strong { color: #1a6b30; }
+    .popup-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 24px 16px;
+      border-top: 1px solid #eee;
+      margin-top: 12px;
+    }
+    .popup-today-close {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: #888; cursor: pointer;
+    }
+    .popup-today-close input { cursor: pointer; accent-color: #1a6b30; }
+    .popup-close-btn {
+      background: #1a6b30; color: #fff;
+      border: none; border-radius: 8px;
+      padding: 8px 20px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .popup-close-btn:hover { background: #155c26; }
+    @media (max-width: 500px) {
+      #site-popup { max-width: 95vw; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ══════════ 홈페이지 입장 팝업 ══════════ -->
+  <div id="site-popup-overlay">
+    <div id="site-popup">
+      <img class="popup-poster" src="멘토모집포스터.png" alt="멘토 모집 포스터"
+           onerror="this.style.display='none'">
+      <div class="popup-body">
+        <h3>📢 대학생 멘토 모집 안내</h3>
+        <p><strong>모집 대상</strong>: 영어 역량을 갖춘 대학생 전국 15명 (재학생 및 휴학생)</p>
+        <p><strong>모집 기간</strong>: 2026.07.24(금) ~ 2026.07.31(금)</p>
+        <p><strong>활동 혜택</strong>: 시간당 활동비 21,000원 (세금공제 전)</p>
+        <p><strong>우대 사항</strong>: 홍천 지역 출신 또는 영어교육 관련 전공 또는 멘토링 경험자 가점 부여</p>
+        <p><strong>모집 절차</strong>: 서류제출 → 심사 → 온라인 면접 → 최종 선발</p>
+        <p><strong>신청 방법</strong>: 누리집 내 구글폼 접수</p>
+        <p>📞 문의: 02-3274-9714 (평일 09:00~18:00)</p>
+      </div>
+      <div class="popup-footer">
+        <label class="popup-today-close">
+          <input type="checkbox" id="popup-today-chk">
+          오늘 하루 보지 않기
+        </label>
+        <button class="popup-close-btn" onclick="closeSitePopup()">닫기</button>
+      </div>
+    </div>
+  </div>
+
 
 <!-- ══ HEADER ══ -->
 <header>
@@ -1282,13 +1369,7 @@
             </div>
             <span class="n-date">2026.08.01</span>
           </div>
-          <div class="n-row" onclick="openNotice('n2')">
-            <div class="n-left">
-              <span class="n-badge gen">공지</span>
-              <span class="n-title">멘토링 참여 학생 모집 안내</span>
-            </div>
-            <span class="n-date">2026.07.21</span>
-          </div>
+
           <div class="n-row" onclick="openNotice('n3')">
             <div class="n-left">
               <span class="n-badge gen">공지</span>
@@ -1357,7 +1438,7 @@
           <div class="ic-icon ic-o">💻</div>
           <div>
             <h3>운영 방식</h3>
-            <p>온라인으로 멘토-멘티 연결 후 수업 진행<br>학교 및 지정 장소에서 프로그램 운영</p>
+            <p>온라인으로 멘토-멘티 연결 후 수업 진행</p>
           </div>
         </div>
 
@@ -1583,7 +1664,7 @@
       <h4 class="f-col-title">홍천 영어멘토링 운영사무국</h4>
       <div class="f-phone-row">
         <span class="f-phone-icon">📞</span>
-        <span class="f-phone">02-3274-9276</span>
+        <span class="f-phone">02-3274-9714</span>
       </div>
       <p class="f-hours">평일 09:00 ~ 17:00<br>점심 (12:30 ~ 13:30)</p>
     </div>
@@ -1705,27 +1786,21 @@ var noticeData = {
       <p>자세한 사항은 추후 공지를 통해 안내드릴 예정입니다. 많은 관심과 참여 부탁드립니다.</p>
     `
   },
-  n2: {
-    badge: 'gen', badgeLabel: '공지',
-    title: '멘토링 참여 학생 모집 안내',
-    date: '2026년 7월 21일 | 강원특별자치도홍천교육지원청',
-    body: `
-      <p><strong>참여 대상</strong>: 홍천 관내 중3, 고1·2 희망학생 30명 (인원 변경 가능)</p>
-      <p><strong>운영 방식</strong>: 온라인으로 멘토-멘티 연결 후 주 1회 1시간 수업 진행 (총 15회기 예정)</p>
-      <p>참여 희망 학생은 담임 선생님 또는 교육지원청으로 문의해주세요.</p>
-      <p>📞 문의: 02-3274-9276 (평일 09:00~18:00)</p>
-    `
-  },
   n3: {
     badge: 'gen', badgeLabel: '공지',
     title: '대학생 멘토 모집 안내',
     date: '2026년 7월 15일 | 강원특별자치도홍천교육지원청',
     body: `
-      <p><strong>모집 대상</strong>: 영어 역량을 갖춘 대학생 (전공 무관)</p>
-      <p><strong>활동 내용</strong>: 홍천 관내 중·고등학생과 1:1 온라인 영어 멘토링 진행</p>
+      <p><strong>모집 대상</strong>: 영어 역량을 갖춘 대학생 전국 15명 (재학생 및 휴학생)</p>
+      <p><strong>활동 내용</strong>: 홍천 관내 중3·고1·고2 재학생과 1:1 온라인 실시간 영어 멘토링</p>
       <p><strong>활동 기간</strong>: 2026년 8월 ~ 2026년 12월 (주 1회 1시간)</p>
-      <p>신청 및 문의는 홍천교육지원청으로 연락 바랍니다.</p>
-      <p>📞 문의: 02-3274-9276 (평일 09:00~18:00)</p>
+      <p><strong>모집 기간</strong>: 2026.07.24(금) ~ 2026.07.31(금)</p>
+      <p><strong>활동 혜택</strong>: 시간당 활동비 21,000원 (세금공제 전 기준)</p>
+      <p><strong>우대 사항</strong>: 홍천 지역 출신 또는 영어교육 관련 전공 또는 멘토링 경험 대학생 대상 별도 가점 부여</p>
+      <p><strong>모집 절차</strong>: 서류제출 → 기본요건 심사 및 서류 검토 → 온라인 면접 → 최종 선발</p>
+      <p><strong>신청 방법</strong>: 누리집 내 구글폼 접수 (누리집 주소 작성 예정)</p>
+      <p>신청 및 문의는 운영사무국으로 연락 바랍니다.</p>
+      <p>📞 문의: 02-3274-9714 (평일 09:00~18:00)</p>
     `
   }
 };
@@ -1992,4 +2067,34 @@ document.addEventListener('keydown', function(e) {
   })();
   </script>
 
+
+  <script>
+  // ── 홈페이지 입장 팝업 ──
+  (function() {
+    var overlay = document.getElementById('site-popup-overlay');
+    if (!overlay) return;
+    // 오늘 하루 안 보기 체크 여부
+    var hideKey = 'sitePopupHide_' + new Date().toISOString().slice(0,10);
+    if (localStorage.getItem(hideKey)) {
+      overlay.style.display = 'none';
+      return;
+    }
+    overlay.style.display = 'flex';
+    // 오버레이 배경 클릭 시 닫기
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeSitePopup();
+    });
+  })();
+
+  function closeSitePopup() {
+    var overlay = document.getElementById('site-popup-overlay');
+    var chk = document.getElementById('popup-today-chk');
+    if (chk && chk.checked) {
+      var hideKey = 'sitePopupHide_' + new Date().toISOString().slice(0,10);
+      localStorage.setItem(hideKey, '1');
+    }
+    overlay.classList.add('hidden');
+    setTimeout(function(){ overlay.style.display = 'none'; }, 300);
+  }
+  </script>
 </body>
